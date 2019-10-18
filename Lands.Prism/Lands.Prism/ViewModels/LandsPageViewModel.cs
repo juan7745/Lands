@@ -1,13 +1,12 @@
 ﻿using Lands.Prism.Models;
 using Lands.Prism.Services;
 using Prism.Navigation;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace Lands.Prism.ViewModels
 {
-     public class LandsPageViewModel : ViewModelBase
+    public class LandsPageViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly IApiService _apiService;
@@ -18,7 +17,7 @@ namespace Lands.Prism.ViewModels
             ApiService apiService) : base(navigationService)
 
         {
-           
+
             _navigationService = navigationService;
             _apiService = apiService;
             Title = "Lands";
@@ -36,6 +35,17 @@ namespace Lands.Prism.ViewModels
         {
 
             var url = App.Current.Resources["UrlAPI"].ToString();
+            var connection = await _apiService.CheckConnection(url);
+
+            if (! connection)
+            {
+                await App.Current.MainPage.DisplayAlert(
+                    "Error",
+                    "Check the internet connection.",
+                    "Accept");
+                return;
+            }
+
             var response = await _apiService.GetListAsync<Land>(
                 url,
                 "/rest",
@@ -50,8 +60,8 @@ namespace Lands.Prism.ViewModels
                 return;
             }
 
-                var list = (List<Land>)response.Result;
-                Lands = new ObservableCollection<Land>(list);
+            var list = (List<Land>)response.Result;
+            Lands = new ObservableCollection<Land>(list);
         }
     }
 }

@@ -15,8 +15,7 @@ namespace Lands.Prism.Services
         {
             if (!CrossConnectivity.Current.IsConnected)
             {
-                return false;
-                
+                return false;                
             }
 
             return await CrossConnectivity.Current.IsRemoteReachable(url);
