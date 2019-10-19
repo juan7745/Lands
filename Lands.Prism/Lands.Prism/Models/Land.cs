@@ -76,5 +76,6 @@ namespace Lands.Prism.Models
 
         [JsonProperty("cioc")]
         public string Cioc { get; set; }
+        
     }
 }

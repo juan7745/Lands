@@ -17,17 +17,28 @@
         <StackLayout 
             BackgroundColor="Black"
             Padding="10">
+            <SearchBar
+                BackgroundColor="Gray"
+                TextColor="Aqua"
+                Text="{Binding Filter, Mode=TwoWay}}"
+                Placeholder="Search..."
+                SearchCommand="{Binding SearchCommand}">
+            </SearchBar>
             <ListView
                     HasUnevenRows="True"
                     ItemsSource="{Binding Lands}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                     <ViewCell>
-                        <Frame BackgroundColor="Aqua"
-                                        CornerRadius="20"
-                                        HasShadow="true"
-                                        Margin="5"
-                                        BorderColor="Aqua">
+                        <Frame 
+                            BackgroundColor="Aqua"
+                            CornerRadius="20"
+                            HasShadow="true"
+                            Margin="5"
+                            BorderColor="Aqua">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding SelectLandComand}"/>
+                            </Frame.GestureRecognizers>
                             <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>

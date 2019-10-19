@@ -5,5 +5,10 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Lands.Prism.Views.DetailLand"
              Title="{Binding Title}">
-  
+    <ContentPage.Content>
+        <StackLayout>
+            <Label
+                Text="Bebesithaas Prr"/>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
