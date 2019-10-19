@@ -7,9 +7,69 @@
              Title="{Binding Title}">
     
         <StackLayout 
+            BackgroundColor="Black"
             Padding="10">
             <ListView
+                    HasUnevenRows="True"
                     ItemsSource="{Binding Lands}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                    <ViewCell>
+                        <Grid BackgroundColor="Black">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Image 
+                                    Grid.Column="0"
+                                    Source="ic_more_vert"/>
+                            
+                                <Frame BackgroundColor="Aqua"
+                                        CornerRadius="20"
+                                        HasShadow="true"
+                                        Margin="5"
+                                        BorderColor="Aqua">
+                                    <Grid
+                                        Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Label
+                                            Grid.Column="0"
+                                            Grid.Row="0"
+                                            FontAttributes="Bold"
+                                            Text="Name"/>
+                                        <Label
+                                            Grid.Column="1"
+                                            Grid.Row="0"
+                                            FontSize="Medium"
+                                            Text="{Binding Name}"
+                                            TextColor="Black">
+                                        </Label>
+                                        <Label
+                                            Grid.Column="0"
+                                            Grid.Row="1"
+                                            FontAttributes="Bold"
+                                            Text="Capital"/>
+                                        <Label
+                                            Grid.Column="1"
+                                            Grid.Row="1"
+                                            Text="{Binding Capital}"
+                                            TextColor="Black">
+                                        </Label>
+                                    </Grid>
+                                </Frame>
+                                <Image 
+                                        Grid.Column="2"
+                                        Source="ic_more_vert"/>
+                                </Grid>
+                        
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
             </ListView>
     </StackLayout>
    
