@@ -2,10 +2,18 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Lands.Prism.Views.LandsPage"
              Title="{Binding Title}">
-    
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <ffimageloadingsvg:SvgImageSourceConverter 
+                    x:Key="SvgImageSourceConverter"/>
+            </ResourceDictionary>
+        </ContentPage.Resources>    
         <StackLayout 
             BackgroundColor="Black"
             Padding="10">
@@ -15,22 +23,31 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                     <ViewCell>
-                        <Grid BackgroundColor="Black">
+                        <Frame BackgroundColor="Aqua"
+                                        CornerRadius="20"
+                                        HasShadow="true"
+                                        Margin="5"
+                                        BorderColor="Aqua">
+                            <Grid >
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
                                     <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
 
-                                <Image 
-                                    Grid.Column="0"
-                                    Source="ic_more_vert"/>
-                            
-                                <Frame BackgroundColor="Aqua"
-                                        CornerRadius="20"
-                                        HasShadow="true"
-                                        Margin="5"
-                                        BorderColor="Aqua">
+                            <ffimageloading:CachedImage
+	                            Grid.Column="0"
+	                            Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
+	                            LoadingPlaceholder= "LoaderImage"
+	                            ErrorPlaceholder= "ErrorImage"
+	                            CacheDuration= "50"
+	                            RetryCount= "3"
+	                            RetryDelay= "600"
+	                            DownsampleToViewSize = "true"
+	                            WidthRequest="60"
+                                HeightRequest="30"/>
+
+
                                     <Grid
                                         Grid.Column="1">
                                         <Grid.ColumnDefinitions>
@@ -61,12 +78,12 @@
                                             TextColor="Black">
                                         </Label>
                                     </Grid>
-                                </Frame>
+                                
                                 <Image 
                                         Grid.Column="2"
                                         Source="ic_more_vert"/>
                                 </Grid>
-                        
+                        </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

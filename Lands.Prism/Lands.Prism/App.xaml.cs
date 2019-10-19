@@ -27,6 +27,7 @@ namespace Lands.Prism
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<LandsPage, LandsPageViewModel>();
+            containerRegistry.RegisterForNavigation<DetailLand, DetailLandViewModel>();
         }
     }
 }
