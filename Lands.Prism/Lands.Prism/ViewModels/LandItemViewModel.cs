@@ -7,24 +7,24 @@ using System.Text;
 
 namespace Lands.Prism.ViewModels
 {
-    public class LandItemViewModel : Response
+    public class LandItemViewModel : Land
     {
         private readonly INavigationService _navigationService;
-        private DelegateCommand _selectCountryCommand;
+        private DelegateCommand _selectLandComand;
 
         public LandItemViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
-        public DelegateCommand SelectCountryCommand => _selectCountryCommand ?? (_selectCountryCommand = new DelegateCommand(SelectCountry));
+        public DelegateCommand SelectLandComand => _selectLandComand ?? (_selectLandComand = new DelegateCommand(SelectCountry));
 
         private async void SelectCountry()
         {
             var parameters = new NavigationParameters
             {
-                { "country", this}
+                { "land", this}
             };
-            await _navigationService.NavigateAsync("CountryPage", parameters);
+            await _navigationService.NavigateAsync("DetailLand", parameters);
         }
     }
 }

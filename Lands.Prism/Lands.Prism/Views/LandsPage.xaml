@@ -20,7 +20,7 @@
             <SearchBar
                 BackgroundColor="Gray"
                 TextColor="Aqua"
-                Text="{Binding Filter, Mode=TwoWay}}"
+                Text="{Binding Filter, Mode=TwoWay}"
                 Placeholder="Search..."
                 SearchCommand="{Binding SearchCommand}">
             </SearchBar>

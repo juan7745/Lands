@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Lands.Prism.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -9,9 +10,29 @@ namespace Lands.Prism.ViewModels
 {
     public class DetailLandViewModel : ViewModelBase
     {
-        public DetailLandViewModel(INavigationService navigationService) : base(navigationService)
+        private Land _country;
+
+        public DetailLandViewModel(
+            INavigationService navigationService) : base(navigationService)
         {
-            Title = "Country";
+        }
+
+        public Land Country
+        {
+            get => _country;
+            set => SetProperty(ref _country, value);
+        }
+
+
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+
+            if (parameters.ContainsKey("land"))
+            {
+                Country = parameters.GetValue<Land>("land");
+                Title = "Details";
+            }
         }
     }
 }
