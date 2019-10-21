@@ -41,7 +41,7 @@
                                 <Grid >
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="Auto"/>
-                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
                                         <ColumnDefinition Width="Auto"/>
                                     </Grid.ColumnDefinitions>
 
@@ -63,12 +63,9 @@
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="2*"/>
+                                            
                                         </Grid.ColumnDefinitions>
-                                        <Label
-                                            Grid.Column="0"
-                                            Grid.Row="0"
-                                            FontAttributes="Bold"
-                                            Text="Name"/>
+
                                         <Label
                                             Grid.Column="1"
                                             Grid.Row="0"
@@ -76,11 +73,7 @@
                                             Text="{Binding Name}"
                                             TextColor="Black">
                                         </Label>
-                                        <Label
-                                            Grid.Column="0"
-                                            Grid.Row="1"
-                                            FontAttributes="Bold"
-                                            Text="Capital"/>
+                                        
                                         <Label
                                             Grid.Column="1"
                                             Grid.Row="1"
@@ -88,24 +81,38 @@
                                             TextColor="Black">
                                         </Label>
                                     </Grid>
+                                    
+                                    <Grid
+                                        Grid.Column="2">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="2*"/>
+
+                                        </Grid.ColumnDefinitions>
 
                                         <Image 
-                                        Grid.Column="2"
+                                        Grid.Column="1"
                                         Grid.Row="0"
-                                        Source="ic_more_vert">
+                                        Source="ic_more_vert"
+                                        HorizontalOptions="CenterAndExpand">
                                             <Image.GestureRecognizers>
                                                 <TapGestureRecognizer Command="{Binding SelectLandComand}"/>
                                             </Image.GestureRecognizers>
                                         </Image>
 
-                                    <Image 
-                                        Grid.Column="2"
+                                        <Image 
+                                        Grid.Column="1"
                                         Grid.Row="1"
-                                        Source="ic_zoom_out_map">
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding SelectMapComand}"/>
-                                        </Image.GestureRecognizers>
-                                    </Image>
+                                        Source="ic_zoom_out_map"
+                                        HorizontalOptions="FillAndExpand">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectMapComand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+                                    </Grid>
+                                    
+
+                                    
                                 </Grid>
                             </Frame>
                         </ViewCell>
