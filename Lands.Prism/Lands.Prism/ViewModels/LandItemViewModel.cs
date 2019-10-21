@@ -11,12 +11,23 @@ namespace Lands.Prism.ViewModels
     {
         private readonly INavigationService _navigationService;
         private DelegateCommand _selectLandComand;
+        private DelegateCommand _selectMapComand;
 
         public LandItemViewModel(INavigationService navigationService)
         {
             _navigationService = navigationService;
         }
         public DelegateCommand SelectLandComand => _selectLandComand ?? (_selectLandComand = new DelegateCommand(SelectCountry));
+        public DelegateCommand SelectMapComand => _selectMapComand ?? (_selectMapComand = new DelegateCommand(SelectMap));
+
+        private async void SelectMap()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "map", this}
+            };
+            await _navigationService.NavigateAsync("MapPage", parameters);
+        }
 
         private async void SelectCountry()
         {

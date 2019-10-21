@@ -5,6 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:fftransformations="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+             xmlns:busyindicator="clr-namespace:Syncfusion.SfBusyIndicator.XForms;assembly=Syncfusion.SfBusyIndicator.XForms"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Lands.Prism.Views.LandsPage"
              Title="{Binding Title}">
@@ -13,7 +14,8 @@
                 <ffimageloadingsvg:SvgImageSourceConverter 
                     x:Key="SvgImageSourceConverter"/>
             </ResourceDictionary>
-        </ContentPage.Resources>    
+        </ContentPage.Resources>
+    <AbsoluteLayout>
         <StackLayout 
             BackgroundColor="Black"
             Padding="10">
@@ -29,24 +31,21 @@
                     ItemsSource="{Binding Lands}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                    <ViewCell>
-                        <Frame 
+                        <ViewCell>
+                            <Frame 
                             BackgroundColor="Aqua"
                             CornerRadius="20"
                             HasShadow="true"
                             Margin="5"
                             BorderColor="Aqua">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding SelectLandComand}"/>
-                            </Frame.GestureRecognizers>
-                            <Grid >
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid >
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
-                            <ffimageloading:CachedImage
+                                    <ffimageloading:CachedImage
 	                            Grid.Column="0"
 	                            Source="{Binding Flag, Converter={StaticResource SvgImageSourceConverter}}"
 	                            LoadingPlaceholder= "LoaderImage"
@@ -89,17 +88,44 @@
                                             TextColor="Black">
                                         </Label>
                                     </Grid>
-                                
-                                <Image 
+
+                                        <Image 
                                         Grid.Column="2"
-                                        Source="ic_more_vert"/>
+                                        Grid.Row="0"
+                                        Source="ic_more_vert">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding SelectLandComand}"/>
+                                            </Image.GestureRecognizers>
+                                        </Image>
+
+                                    <Image 
+                                        Grid.Column="2"
+                                        Grid.Row="1"
+                                        Source="ic_zoom_out_map">
+                                        <Image.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding SelectMapComand}"/>
+                                        </Image.GestureRecognizers>
+                                    </Image>
                                 </Grid>
-                        </Frame>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-    </StackLayout>
+        </StackLayout>
+        <busyindicator:SfBusyIndicator  
+                AnimationType="ZoomingTarget"
+                AbsoluteLayout.LayoutBounds=".5,.5,.5,.5"
+                AbsoluteLayout.LayoutFlags="All"
+                BackgroundColor="Transparent"
+                TextColor="Aqua"
+                HorizontalOptions="Center"
+                IsVisible="{Binding IsRunning}"
+                Title="Loading..."
+                VerticalOptions="Center"
+                ViewBoxWidth="80"
+                ViewBoxHeight="80" />
+    </AbsoluteLayout>
    
 
 </ContentPage>
